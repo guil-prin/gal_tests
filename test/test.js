@@ -27,16 +27,12 @@ Story.prototype.testStoryFour = function() {
 }
 
 Story.prototype.testStoryFive = function() {
-    /*** Disposition des blocs :
-     * 0 - 1
-     * 2 - 3
-     */
     var numGridToRotate = 0;
-    var rotateWay = 1; // 1 = horaire - 0 = antihoraire
+    var rotateWay = 1;
     board.rotateBoard(numGridToRotate, rotateWay);
     var caseJouee = board.getSquare("a1");
     assertEquals(undefined, caseJouee);
-    var caseJouee = board.getSquare("c1");
+    caseJouee = board.getSquare("c1");
     assertEquals(1, caseJouee);
 }
 
@@ -50,4 +46,19 @@ Story.prototype.testStorySeven = function() {
     board.setTokenInGrid(selectedSquare);
     var caseJouee = board.getSquare(selectedSquare);
     assertEquals(2, caseJouee);
+}
+
+Story.prototype.testStoryEight = function() {
+    var numGridToRotate = 0;
+    var rotateWay = 0; // 1 = horaire - 0 = antihoraire
+    board.rotateBoard(numGridToRotate, rotateWay);
+    var caseJouee = board.getSquare("a1");
+    assertEquals(1, caseJouee);
+    caseJouee = board.getSquare("a3");
+    assertEquals(2, caseJouee);
+}
+
+Story.prototype.testStoryNine = function() {
+    var selectedSquare = "a1";
+    assertException(function(){board.setTokenInGrid(selectedSquare)}, "Already played square");
 }

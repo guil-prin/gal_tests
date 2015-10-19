@@ -30,8 +30,14 @@ var Engine = function() {
         var j1 = Math.floor(pos2/3);
         var i2 = pos1 % 3;
         var j2 = pos2 % 3;
-        grid[i1][j1][i2][j2] = currentPlayer;
-        nbBilles++;
+        if (grid[i1][j1][i2][j2] == undefined) {
+            grid[i1][j1][i2][j2] = currentPlayer;
+            nbBilles++;
+        }
+        else {
+            console.log("test");
+            throw new alreadyPlayedSquareException();
+        }
     };
 
     this.getSquare = function(square) {
@@ -82,5 +88,9 @@ var Engine = function() {
     }
 
 };
+
+var alreadyPlayedSquareException = function() {
+    this.name = "Already played square";
+}
 
 var board = new Engine();
