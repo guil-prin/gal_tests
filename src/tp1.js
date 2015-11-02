@@ -52,29 +52,11 @@ Engine = function () {
     };
 
     this.rotateBoard = function (numGridToRotate, rotateWay) {
-        var i1 = Math.floor(numGridToRotate / 2), j1 = numGridToRotate % 2, tmp = 0;
+
         if (rotateWay) {
-            tmp = grid[i1][j1][0][0];
-            grid[i1][j1][0][0] = grid[i1][j1][0][2];
-            grid[i1][j1][0][2] = grid[i1][j1][2][2];
-            grid[i1][j1][2][2] = grid[i1][j1][2][0];
-            grid[i1][j1][2][0] = tmp;
-            tmp = grid[i1][j1][1][0];
-            grid[i1][j1][1][0] = grid[i1][j1][0][1];
-            grid[i1][j1][0][1] = grid[i1][j1][1][2];
-            grid[i1][j1][1][2] = grid[i1][j1][2][1];
-            grid[i1][j1][2][1] = tmp;
+            this.rotateClockWise(numGridToRotate);
         } else {
-            tmp = grid[i1][j1][0][0];
-            grid[i1][j1][0][0] = grid[i1][j1][2][0];
-            grid[i1][j1][2][0] = grid[i1][j1][2][2];
-            grid[i1][j1][2][2] = grid[i1][j1][0][2];
-            grid[i1][j1][0][2] = tmp;
-            tmp = grid[i1][j1][1][0];
-            grid[i1][j1][1][0] = grid[i1][j1][2][1];
-            grid[i1][j1][2][1] = grid[i1][j1][1][2];
-            grid[i1][j1][1][2] = grid[i1][j1][0][1];
-            grid[i1][j1][0][1] = tmp;
+            this.rotateCounterClockWise(numGridToRotate);
         }
 
         if (currentPlayer === 1) {
@@ -82,6 +64,39 @@ Engine = function () {
         } else {
             currentPlayer = 1;
         }
+    };
+
+    this.rotateClockWise = function (numGridToRotate) {
+        var i1 = numGridToRotate % 2, j1 = Math.floor(numGridToRotate / 2), tmp = 0;
+        tmp = grid[i1][j1][0][0];
+        grid[i1][j1][0][0] = grid[i1][j1][0][2];
+        grid[i1][j1][0][2] = grid[i1][j1][2][2];
+        grid[i1][j1][2][2] = grid[i1][j1][2][0];
+        grid[i1][j1][2][0] = tmp;
+        tmp = grid[i1][j1][1][0];
+        grid[i1][j1][1][0] = grid[i1][j1][0][1];
+        grid[i1][j1][0][1] = grid[i1][j1][1][2];
+        grid[i1][j1][1][2] = grid[i1][j1][2][1];
+        grid[i1][j1][2][1] = tmp;
+    };
+
+    this.rotateCounterClockWise = function (numGridToRotate) {
+        var i1 = numGridToRotate % 2, j1 = Math.floor(numGridToRotate / 2), tmp = 0;
+        tmp = grid[i1][j1][0][0];
+        grid[i1][j1][0][0] = grid[i1][j1][2][0];
+        grid[i1][j1][2][0] = grid[i1][j1][2][2];
+        grid[i1][j1][2][2] = grid[i1][j1][0][2];
+        grid[i1][j1][0][2] = tmp;
+        tmp = grid[i1][j1][1][0];
+        grid[i1][j1][1][0] = grid[i1][j1][2][1];
+        grid[i1][j1][2][1] = grid[i1][j1][1][2];
+        grid[i1][j1][1][2] = grid[i1][j1][0][1];
+        grid[i1][j1][0][1] = tmp;
+    };
+
+    this.playOneTurn = function (square, numGridToRotate, rotateWay) {
+        this.setTokenInGrid(square);
+        this.rotateBoard(numGridToRotate, rotateWay);
     };
 
 };

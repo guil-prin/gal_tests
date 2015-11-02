@@ -62,3 +62,22 @@ Story.prototype.testStoryNine = function () {
     var selectedSquare = "a1";
     assertException(function(){board.setTokenInGrid(selectedSquare)}, "Already played square");
 };
+
+Story.prototype.testStoryTen = function () {
+    board.playOneTurn("b1", 0, 1);
+    board.playOneTurn("a2", 0, 0);
+    board.playOneTurn("c1", 0, 1);
+    board.playOneTurn("a3", 0, 0);
+    board.playOneTurn("d1", 1, 0);
+    board.playOneTurn("f3", 1, 1);
+    var nbMarbles = board.getNbMarbles();
+    assertEquals(8, nbMarbles);
+    assertEquals(1, board.getSquare("a1"));
+    assertEquals(1, board.getSquare("b1"));
+    assertEquals(1, board.getSquare("c1"));
+    assertEquals(1, board.getSquare("d1"));
+    assertEquals(2, board.getSquare("a3"));
+    assertEquals(2, board.getSquare("b3"));
+    assertEquals(2, board.getSquare("c3"));
+    assertEquals(2, board.getSquare("d3"));
+};
