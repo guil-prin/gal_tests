@@ -112,9 +112,11 @@ Engine = function () {
     };
 
     this.getHorizontalWinner = function (lastPlayed) {
-        var pos = this.getGridPositions(lastPlayed), curPlayer = this.getSquare(lastPlayed), partiallyGood =
-            (curPlayer == grid[0][pos.j1][1][pos.j2] == grid[0][pos.j1][2][pos.j2] == grid[1][pos.j1][0][pos.j2] ==
-            grid[1][pos.j1][1][pos.j2]);
+        var pos = this.getGridPositions(lastPlayed), curPlayer = this.getSquare(lastPlayed),
+            partiallyGood = (curPlayer == grid[0][pos.j1][1][pos.j2]
+                                       == grid[0][pos.j1][2][pos.j2]
+                                       == grid[1][pos.j1][0][pos.j2]
+                                       == grid[1][pos.j1][1][pos.j2]);
         if (partiallyGood) {
             if (grid[0][pos.j1][0][pos.j2] === curPlayer || grid[0][pos.j1][1][pos.j2] === curPlayer) {
                 return curPlayer;
