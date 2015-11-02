@@ -81,3 +81,14 @@ Story.prototype.testStoryTen = function () {
     assertEquals(2, board.getSquare("c3"));
     assertEquals(2, board.getSquare("d3"));
 };
+
+Story.prototype.testStoryEleven = function () {
+    board.setTokenInGrid("e1");
+    assertEquals(1, board.getWinner("e1"));
+};
+
+Story.prototype.testStoryTwelve = function () {
+    board.resetBoard();
+    assertEquals(0, board.getNbMarbles());
+    assertEquals(undefined, board.getSquare("a1"));
+};

@@ -9,7 +9,7 @@ var AlreadyPlayedSquareException = function () {
 var Engine;
 Engine = function () {
     "use strict";
-    var nbMarbles = 0, currentPlayer = 1, grid = new Array(2), i, j, k;
+    var nbMarbles = 0, currentPlayer = 1, grid = new Array(2), i, j, k, l;
     for (i = 0; i < 2; i++) {
         grid[i] = new Array(2);
         for (j = 0; j < 3; j++) {
@@ -97,6 +97,48 @@ Engine = function () {
     this.playOneTurn = function (square, numGridToRotate, rotateWay) {
         this.setTokenInGrid(square);
         this.rotateBoard(numGridToRotate, rotateWay);
+    };
+
+    this.getWinner = function (lastPlayed) {
+        var winner = 0;
+        winner = this.getHorizontalWinner(lastPlayed);
+        /*if(winner === 0) {
+            winner = this.getVerticalWinner(lastPlayed);
+        }
+        if(winner === 0) {
+            winner = this.getDiagonalWinner(lastPlayed);
+        }*/
+        return winner;
+    };
+
+    this.getHorizontalWinner = function (lastPlayed) {
+        var pos = this.getGridPositions(lastPlayed), curPlayer = this.getSquare(lastPlayed), partiallyGood =
+            (curPlayer == grid[0][pos.j1][1][pos.j2] == grid[0][pos.j1][2][pos.j2] == grid[1][pos.j1][0][pos.j2] ==
+            grid[1][pos.j1][1][pos.j2]);
+        if (partiallyGood) {
+            if (grid[0][pos.j1][0][pos.j2] === curPlayer || grid[0][pos.j1][1][pos.j2] === curPlayer) {
+                return curPlayer;
+            } else {
+                return 0;
+            }
+        }
+        else {
+            return 0;
+        }
+    };
+
+    this.resetBoard = function () {
+        for (i = 0; i < 2; i++) {
+            for (j = 0; j < 2; j++) {
+                for (k = 0; k < 3; k++) {
+                    for (l = 0; l < 3; l++) {
+                        grid[i][j][k][l] = undefined;
+                    }
+                }
+            }
+        }
+        nbMarbles = 0;
+        currentPlayer = 1;
     };
 
 };
